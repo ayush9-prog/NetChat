@@ -1,15 +1,10 @@
-Here is the complete, raw Markdown code for your `README.md`. It includes a clean visual layout, architectural flow, and explicit instructions on the Git workflow you used to build it.
-
-You can copy and paste this directly into your file:
-
-```markdown
-# NetChat 🚀
+# NetChat 
 
 A lightweight, Command-Line Interface (CLI) based chat application built using Python's native networking capabilities. This project was developed to understand the fundamentals of the **TCP/IP socket lifecycle** and to practice standard industry **Git/GitHub workflows**.
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 NetChat follows a classic **Client-Server architecture**. The server acts as a centralized host that binds to a specific local port and listens for incoming connections, while the client connects to the host to facilitate real-time message exchange over TCP.
 
@@ -19,7 +14,7 @@ NetChat follows a classic **Client-Server architecture**. The server acts as a c
 
 ---
 
-## 🏗️ Architecture & Flow
+## Architecture & Flow
 
 
 ```
@@ -38,7 +33,7 @@ NetChat follows a classic **Client-Server architecture**. The server acts as a c
 
 ---
 
-## 🛠️ Getting Started
+##  Getting Started
 
 ### Prerequisites
 * **Python 3.x** installed on your system.
@@ -57,7 +52,7 @@ NetChat follows a classic **Client-Server architecture**. The server acts as a c
 
 ---
 
-## 🚦 How to Run the Application
+## How to Run the Application
 
 To test the application locally, you will need to open **two separate terminal windows or tabs** to run the host and guest components simultaneously.
 
@@ -91,7 +86,7 @@ python client.py
 
 ---
 
-## 🌲 Git Workflow History
+## Git Workflow History
 
 This repository was built using standard industry feature-branching practices:
 
@@ -100,14 +95,4 @@ This repository was built using standard industry feature-branching practices:
 3. `feature-client` branch created to build out the network endpoint communication logic.
 4. Feature branches safely merged back into `main` after local integration testing.
 
----
 
-## ⌥ Future Roadmap & Enhancements
-
-* [ ] **Multi-threading Support:** Implement Python's `threading` module to allow multiple client terminals to connect to the same server simultaneously.
-* [ ] **LAN Broadcast:** Transition from localhost (`127.0.0.1`) to a local network configuration to chat across different devices on the same Wi-Fi.
-* [ ] **Custom Usernames:** Prompt users for a unique nickname upon connection.
-
-```
-
-```
