@@ -17,19 +17,37 @@ NetChat follows a classic **Client-Server architecture**. The server acts as a c
 ## Architecture & Flow
 
 
-```
-
-[ Client Terminal ]                               [ Server Terminal ]
-|                                                 |
-| --- 1. TCP Handshake (connect) --------------> | (listens via bind)
-| <--- 2. Connection Accepted ------------------- | (accepts connection)
-|                                                 |
-| --- 3. Encoded Bytes (send) ------------------> | (reads via recv)
-| <--- 4. Acknowledgment Response -------------- | (processes & replies)
-|                                                 |
-(exit)                                            (close)
-
-```
+┌────────────────────────────────────────┐          ┌────────────────────────────────────────┐
+│            CLIENT TERMINAL             │          │            SERVER TERMINAL             │
+└───────────────────┬────────────────────┘          └───────────────────┬────────────────────┘
+                    │                                                   │ [Starts up]
+                    │                                                   │ socket() ➔ bind() ➔ listen()
+                    │                                                   │ 
+                    │                                                   ▼ (BLOCKED: Waiting for connection)
+                    │ ─── 1. TCP Handshake (.connect()) ──────────────> accept()
+                    │                                                   │
+                    │ <── 2. Connection Established ───────────────────  [Unblocks & creates client_socket]
+                    │                                                   │
+                    ▼ (BLOCKED: Waiting for input)                      ▼ (BLOCKED: Waiting for data)
+             [You]: "Hello!"                                            │
+                    │ ─── 3. Send Encoded Bytes (.send()) ────────────> recv() 
+                    │                                                   │ [Unblocks] 
+                    │                                                   │ Prints: "[Client]: Hello!"
+                    │                                                   │ 
+                    ▼ (BLOCKED: Waiting for Server)                     ▼ (BLOCKED: Waiting for input)
+                    │                                            [You (Server)]: "Hey there!"
+                    │ <── 4. Send Custom Reply (.send()) ────────────── │ 
+                    │                                                   │
+                    │ [Unblocks]                                        ▼ (Loops back to .recv() & blocks)
+                    │ Prints: "[Server]: Hey there!"                    
+                    ▼                                                   
+             (Repeats turn-by-turn)                                     
+                    │                                                   
+             [You]: "exit"                                              
+                    │ ─── 5. Teardown Signal ─────────────────────────> recv() ➔ Returns empty/exit
+                    │                                                   │
+                    ▼ (.close())                                        ▼ (.close())
+             [Client Closed]                                     [Connection Teardown]
 
 ---
 
@@ -43,10 +61,9 @@ NetChat follows a classic **Client-Server architecture**. The server acts as a c
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/your-username/NetChat.git](https://github.com/your-username/NetChat.git)
+   git clone https://github.com/ayush9-prog/NetChat.git
    cd NetChat
-
-```
+   ```
 
 2. **Verify your local files:** Ensure both `server.py` and `client.py` are present in your root directory.
 
