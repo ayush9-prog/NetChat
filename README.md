@@ -48,10 +48,9 @@ NetChat follows a classic **Client-Server architecture**. The server acts as a c
                     │                                                   │
                     ▼ (.close())                                        ▼ (.close())
              [Client Closed]                                     [Connection Teardown]
-
+```
 ---
-
-##  Getting Started
+## Getting Started
 
 ### Prerequisites
 * **Python 3.x** installed on your system.
