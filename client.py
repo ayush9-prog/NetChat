@@ -16,17 +16,20 @@ try:
     # 4. Communication loop
     while True:
         user_message = input("[You]: ")
-        
-        # Send message to server (must encode string to bytes)
         client_socket.send(user_message.encode('utf-8'))
         
         if user_message.lower() == 'exit':
             print("[-] Disconnecting...")
             break
             
-        # Wait for the server's acknowledgment response
+        # Wait for the server's custom reply
         server_reply = client_socket.recv(1024).decode('utf-8')
-        print(f"[{server_reply}]")
+        
+        if not server_reply or server_reply.lower() == 'exit':
+            print("[-] Server ended the chat session.")
+            break
+            
+        print(f"[Server]: {server_reply}")
 
 except ConnectionRefusedError:
     print("[-] Could not connect to the server. Is server.py running?")
