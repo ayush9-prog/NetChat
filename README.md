@@ -1,6 +1,6 @@
 # NetChat 
 
-A lightweight, Command-Line Interface (CLI) based chat application built using Python's native networking capabilities. This project was developed to understand the fundamentals of the **TCP/IP socket lifecycle** and to practice standard industry **Git/GitHub workflows**.
+A lightweight, Command-Line Interface (CLI) based chat application built using Python's native networking capabilities.
 
 ---
 
