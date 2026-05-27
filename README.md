@@ -66,13 +66,3 @@ python client.py
 
 ---
 
-## Git Workflow History
-
-This repository was built using standard industry feature-branching practices:
-
-1. `main` branch initialized with core documentation.
-2. `feature-server` branch created to develop and isolate the socket host configuration.
-3. `feature-client` branch created to build out the network endpoint communication logic.
-4. Feature branches safely merged back into `main` after local integration testing.
-
-
