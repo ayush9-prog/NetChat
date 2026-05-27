@@ -14,42 +14,6 @@ NetChat follows a classic **Client-Server architecture**. The server acts as a c
 
 ---
 
-## Architecture & Flow
-
-```text
-┌────────────────────────────────────────┐          ┌────────────────────────────────────────┐
-│            CLIENT TERMINAL             │          │            SERVER TERMINAL             │
-└───────────────────┬────────────────────┘          └───────────────────┬────────────────────┘
-                    │                                                   │ [Starts up]
-                    │                                                   │ socket() ➔ bind() ➔ listen()
-                    │                                                   │ 
-                    │                                                   ▼ (BLOCKED: Waiting for connection)
-                    │ ─── 1. TCP Handshake (.connect()) ──────────────> accept()
-                    │                                                   │
-                    │ <── 2. Connection Established ───────────────────  [Unblocks & creates client_socket]
-                    │                                                   │
-                    ▼ (BLOCKED: Waiting for input)                      ▼ (BLOCKED: Waiting for data)
-             [You]: "Hello!"                                            │
-                    │ ─── 3. Send Encoded Bytes (.send()) ────────────> recv() 
-                    │                                                   │ [Unblocks] 
-                    │                                                   │ Prints: "[Client]: Hello!"
-                    │                                                   │ 
-                    ▼ (BLOCKED: Waiting for Server)                     ▼ (BLOCKED: Waiting for input)
-                    │                                            [You (Server)]: "Hey there!"
-                    │ <── 4. Send Custom Reply (.send()) ────────────── │ 
-                    │                                                   │
-                    │ [Unblocks]                                        ▼ (Loops back to .recv() & blocks)
-                    │ Prints: "[Server]: Hey there!"                    
-                    ▼                                                   
-             (Repeats turn-by-turn)                                     
-                    │                                                   
-             [You]: "exit"                                              
-                    │ ─── 5. Teardown Signal ─────────────────────────> recv() ➔ Returns empty/exit
-                    │                                                   │
-                    ▼ (.close())                                        ▼ (.close())
-             [Client Closed]                                     [Connection Teardown]
-```
----
 ## Getting Started
 
 ### Prerequisites
