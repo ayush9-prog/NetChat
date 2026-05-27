@@ -16,7 +16,7 @@ NetChat follows a classic **Client-Server architecture**. The server acts as a c
 
 ## Architecture & Flow
 
-
+```text
 ┌────────────────────────────────────────┐          ┌────────────────────────────────────────┐
 │            CLIENT TERMINAL             │          │            SERVER TERMINAL             │
 └───────────────────┬────────────────────┘          └───────────────────┬────────────────────┘
@@ -48,7 +48,6 @@ NetChat follows a classic **Client-Server architecture**. The server acts as a c
                     │                                                   │
                     ▼ (.close())                                        ▼ (.close())
              [Client Closed]                                     [Connection Teardown]
-
 ---
 
 ##  Getting Started
